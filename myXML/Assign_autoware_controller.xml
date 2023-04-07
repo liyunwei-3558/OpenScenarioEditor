@@ -1,0 +1,21 @@
+<PrivateAction>
+            <ControllerAction>
+                <AssignControllerAction>
+                    <Controller name="EgoVehicleAgent">
+                        <Properties>
+                            <Property name="module" value="carla_ros_scenario_runner.ros_vehicle_control" />
+                            <Property name="launch" value="carla_autoware_agent_town05.launch"/>
+                            <Property name="launch-package" value="carla_autoware_agent"/>
+                        </Properties>
+                    </Controller>
+                </AssignControllerAction>
+                <OverrideControllerValueAction>
+                    <Throttle value="0" active="false" />
+                    <Brake value="0" active="false" />
+                    <Clutch value="0" active="false" />
+                    <ParkingBrake value="0" active="false" />
+                    <SteeringWheel value="0" active="false" />
+                    <Gear number="0" active="false" />
+                </OverrideControllerValueAction>
+            </ControllerAction>
+        </PrivateAction>
