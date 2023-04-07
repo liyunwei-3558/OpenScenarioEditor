@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSCENARIO>
+  <FileHeader author="SimOne" date="2023-03-14T14:12:24" description="try51" revMajor="1" revMinor="0" />
+  <CatalogLocations />
+  <RoadNetwork>
+    <LogicFile filepath="Town05"/>
+    <SceneGraphFile filepath=""/>
+  </RoadNetwork>
+  <Entities>
+    <ScenarioObject name="53427870-c22f-11ed-bef7-3d48f45ba1b2">
+      <Vehicle name="vehicle.audi.a2" vehicleCategory="car"> *
+        <Performance maxAcceleration="0" maxDeceleration="0" maxSpeed="0" />
+        <Axles>
+          <FrontAxle maxSteering="0" positionX="0" positionZ="0" trackWidth="0" wheelDiameter="0" />
+          <RearAxle maxSteering="0" positionX="0" positionZ="0" trackWidth="0" wheelDiameter="0" />
+        </Axles>
+        <BoundingBox>
+          <Center x="0" y="0" z="0" />
+          <Dimensions height="1.53719208" length="3.7265841699999998" width="1.9377825899999999" />
+        </BoundingBox>
+        <Properties>
+          <Property name="model" value="vehicle.audi.a2" />  *
+          <Property name="category" value="vehicle" />
+          <Property name="name" value="AudiA2" />
+          <Property name="obuId" value="1" />
+          <Property name="obu_enabled" value="false" />
+          <Property name="type" value="simulation"/> *
+          <Property name="color" value="255,0,0"/>
+        </Properties>
+      </Vehicle>
+    </ScenarioObject>
+    <ScenarioObject name="617c7ac0-c230-11ed-bef7-3d48f45ba1b2">
+      <Vehicle name="vehicle.carlamotors.carlacola" vehicleCategory="car">
+        <Performance maxAcceleration="0" maxDeceleration="0" maxSpeed="0" />
+        <Axles>
+          <FrontAxle maxSteering="0" positionX="0" positionZ="0" trackWidth="0" wheelDiameter="0" />
+          <RearAxle maxSteering="0" positionX="0" positionZ="0" trackWidth="0" wheelDiameter="0" />
+        </Axles>
+        <BoundingBox>
+          <Center x="0" y="0" z="0" />
+          <Dimensions height="1.7" length="2.2" width="0.7" />
+        </BoundingBox>
+        <Properties>
+          <Property name="model" value="vehicle.carlamotors.carlacola" />
+          <Property name="category" value="vehicle" />
+          <Property name="name" value="vehicle.carlamotors.carlacola" />
+          <Property name="obuId" value="2" />
+          <Property name="obu_enabled" value="false" />
+          <Property name="type" value="simulation"/>
+        </Properties>
+      </Vehicle>
+    </ScenarioObject>
+    <ScenarioObject name="ego_vehicle">
+      <Vehicle name="simonedriver" vehicleCategory="car">
+        <BoundingBox>
+          <Center x="0" y="0" z="0" />
+          <Dimensions height="1.48" length="4.93" width="1.86" />
+        </BoundingBox>
+        <Performance maxSpeed="69.444" maxAcceleration="10.0" maxDeceleration="10.0" />
+        <Axles>
+          <FrontAxle maxSteering="0.5" wheelDiameter="0.6" trackWidth="1.8" positionX="3.1" positionZ="0.3"/>
+          <RearAxle maxSteering="0.0" wheelDiameter="0.6" trackWidth="1.8" positionX="0.0" positionZ="0.3"/>
+        </Axles>
+        <Properties>
+          <!-- <Property name="model" value="simonedriver" /> -->
+          <Property name="category" value="ego_vehicle" />
+          <Property name="name" value="SimOneDriver_controller" />
+          <Property name="obuId" value="0" />
+          <Property name="obu_enabled" value="false" />
+          <Property name="type" value="ego_vehicle"/>
+          <Property name="color" value="0,0,255"/>
+        </Properties>
+      </Vehicle>
+    </ScenarioObject>
+  </Entities>
+  <Storyboard>
+    <Init>
+      <Actions>
+        <GlobalAction><EnvironmentAction><Environment name="rainy04"><TimeOfDay animation="false" dateTime="2023-03-14T17:45:00" /><Weather cloudState="cloudy"><Sun azimuth="0" elevation="1.57" intensity="60000" /><Fog visualRange="1200" /><Precipitation intensity="1.0" precipitationType="rain" /></Weather><RoadCondition frictionScaleFactor="0.5"><Properties><Property name="humidityLevel" value="0.5" /><Property name="dirtyLevel" value="0.1" /></Properties></RoadCondition></Environment></EnvironmentAction>
+        </GlobalAction>
+        <Private entityRef="53427870-c22f-11ed-bef7-3d48f45ba1b2">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <WorldPosition h="3.137224677088429" p="0" r="0" x="88.917178" y="1.574508950504936" z="0" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="20" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <!-- <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction>
+                <Trajectory closed="false" name="po">
+                  <Shape>
+                    <FittedClothoid>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="3.137224677088429" p="0" r="0" x="78.07199740737536" y="1.5956727221982299" z="0" />
+                        </Position>
+                      </Vertex>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="3.137224677088429" p="0" r="0" x="49.562541858981646" y="1.7202021460760109" z="0" />
+                        </Position>
+                      </Vertex>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="-3.138813251250344" p="0" r="0" x="17.80236580737014" y="0.9942315168021914" z="0" />
+                        </Position>
+                      </Vertex>
+                    </FittedClothoid>
+                  </Shape>
+                </Trajectory>
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="follow" />
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction> -->
+        </Private>
+        <Private entityRef="617c7ac0-c230-11ed-bef7-3d48f45ba1b2">
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <WorldPosition h="1.5742238594314764" p="0" r="0" x="35.10322741282972" y="-15.873073271463417" z="1.5e-05" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="0" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <PrivateAction>
+            <RoutingAction>
+              <AssignRouteAction>
+                <Route closed="false" name="">
+                  <Waypoint routeStrategy="shortest">
+                    <Position>
+                      <WorldPosition h="1.5779770666522537" p="0" r="0" x="35.09286403167986" y="-13.739136208773076" z="1.5e-05" />
+                    </Position>
+                  </Waypoint>
+
+                  <Waypoint routeStrategy="shortest">
+                    <Position>
+                      <WorldPosition h="1.5779770666522537" p="0" r="0" x="39.09286403167986" y="-13.739136208773076" z="1.5e-05" />
+                    </Position>
+                  </Waypoint>
+                </Route>
+              </AssignRouteAction>
+            </RoutingAction>
+          </PrivateAction>
+        </Private>
+        <Private entityRef="ego_vehicle"> * 
+          <PrivateAction>
+            <TeleportAction>
+              <Position>
+                <WorldPosition h="0.002434045350114592" p="0" r="0" x="-11.748552722109608" y="-2.577923457498246" z="0" />
+              </Position>
+            </TeleportAction>
+          </PrivateAction>
+          
+          <PrivateAction>
+            <LongitudinalAction>
+              <SpeedAction>
+                <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="step" value="0" />
+                <SpeedActionTarget>
+                  <AbsoluteTargetSpeed value="10" />
+                </SpeedActionTarget>
+              </SpeedAction>
+            </LongitudinalAction>
+          </PrivateAction>
+          <PrivateAction>
+            <ActivateControllerAction lateral="true" longitudinal="true" />
+          </PrivateAction>
+          <!-- <PrivateAction>
+            <RoutingAction>
+              <FollowTrajectoryAction>
+                <Trajectory closed="false" name="Waypoint">
+                  <Shape>
+                    <FittedClothoid>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="0.00243404535011533" p="0" r="0" x="-5.376642801837064" y="-2.562413909156273" z="0" />
+                        </Position>
+                      </Vertex>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="0.002434045350113178" p="0" r="0" x="5.373293509088475" y="-2.5362480249906834" z="0" />
+                        </Position>
+                      </Vertex>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="0.02266851970608691" p="0" r="0" x="22.8744091170697" y="-2.461812326626574" z="0" />
+                        </Position>
+                      </Vertex>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="1.5718620687929996" p="0" r="0" x="34.8971435213892" y="9.879654736666179" z="1.5e-05" />
+                        </Position>
+                      </Vertex>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="1.5440556399563947" p="0" r="0" x="35.15825784854936" y="27.01359802345923" z="1.5e-05" />
+                        </Position>
+                      </Vertex>
+                      <Vertex time="0">
+                        <Position>
+                          <WorldPosition h="1.544056494962709" p="0" r="0" x="35.75602858870294" y="49.36333592462161" z="1.5e-05" />
+                        </Position>
+                      </Vertex>
+                    </FittedClothoid>
+                  </Shape>
+                </Trajectory>
+                <TimeReference>
+                  <None />
+                </TimeReference>
+                <TrajectoryFollowingMode followingMode="follow" />
+              </FollowTrajectoryAction>
+            </RoutingAction>
+          </PrivateAction> -->
+        </Private>
+      </Actions>
+    </Init>
+    <Story name="Story">
+      <Act name="Act">
+        <ManeuverGroup maximumExecutionCount="1" name="53427870-c22f-11ed-bef7-3d48f45ba1b2">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="53427870-c22f-11ed-bef7-3d48f45ba1b2" />
+          </Actors>
+        </ManeuverGroup>
+        <ManeuverGroup maximumExecutionCount="1" name="617c7ac0-c230-11ed-bef7-3d48f45ba1b2">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="617c7ac0-c230-11ed-bef7-3d48f45ba1b2" />
+          </Actors>
+          <Maneuver name="Maneuver">
+            <Event maximumExecutionCount="1" name="event1" priority="parallel">
+              <Action name="cdfb33fe-3a70-4ebf-ad06-e270f6b20552">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <SpeedAction>
+                      <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="sinusoidal" value="2" />
+                      <SpeedActionTarget>
+                        <AbsoluteTargetSpeed value="15" />
+                      </SpeedActionTarget>
+                    </SpeedAction>
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition conditionEdge="rising" delay="0" name="relative_distance">
+                    <ByEntityCondition>
+                      <EntityCondition>
+                        <RelativeDistanceCondition entityRef="53427870-c22f-11ed-bef7-3d48f45ba1b2" freespace="false" relativeDistanceType="cartesianDistance" rule="lessThan" value="30" />
+                      </EntityCondition>
+                      <TriggeringEntities triggeringEntitiesRule="any">
+                        <EntityRef entityRef="617c7ac0-c230-11ed-bef7-3d48f45ba1b2" />
+                      </TriggeringEntities>
+                    </ByEntityCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <ManeuverGroup maximumExecutionCount="1" name="ego_vehicle">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="ego_vehicle" />
+          </Actors>
+        </ManeuverGroup>
+        <StartTrigger>
+          <ConditionGroup>
+            <Condition conditionEdge="rising" delay="0" name="start">
+              <ByValueCondition>
+                <SimulationTimeCondition rule="greaterThan" value="0" />
+              </ByValueCondition>
+            </Condition>
+          </ConditionGroup>
+        </StartTrigger>
+      </Act>
+    </Story>
+    <StopTrigger>
+      <ConditionGroup>
+        <Condition conditionEdge="none" delay="0" name="end">
+          <ByValueCondition>
+            <SimulationTimeCondition rule="greaterThan" value="666" />
+          </ByValueCondition>
+        </Condition>
+      </ConditionGroup>
+    </StopTrigger>
+  </Storyboard>
+</OpenSCENARIO>
