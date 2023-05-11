@@ -1,4 +1,4 @@
-<Event maximumExecutionCount="120" name="shijian123" priority="parallel">
+<Event maximumExecutionCount="10" name="shijian123" priority="parallel">
   <Action name="traffic_signal_control">
     <GlobalAction>
       <InfrastructureAction>
