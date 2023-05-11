@@ -2,7 +2,7 @@
 Author: Yunwei Li 1084087910@qq.com
 Date: 2023-04-01 16:05:16
 LastEditors: Yunwei Li 1084087910@qq.com
-LastEditTime: 2023-04-05 02:20:09
+LastEditTime: 2023-05-11 19:38:39
 FilePath: /scripts/XOSC_converter.py
 Description: 
 
@@ -59,6 +59,18 @@ def parse_my_xml(filename):
     return ET.parse(filename).getroot()
 
 
+def get_traffic_event(state, dis):
+    tl = ET.parse('./myXML/traffic_light.xml').getroot()
+    # ste = tl.find('.//')
+    for ste_i in tl.iterfind('TrafficSignalStateAction'):
+        ste_i.set('state', state)
+        break
+    
+    for pos in tl.iterfind('WorldPosition'):
+        pos.set('y', dis)
+    
+    return tl
+
 argparser = argparse.ArgumentParser()
 argparser.add_argument('-n',
                        '--name',
@@ -69,6 +81,16 @@ argparser.add_argument('-c',
                        '--controller',
                        default='autoware',
                        help='choose the controller of ego vehicle')
+argparser.add_argument('-tl',
+                       '--trafficlight',
+                       default='Green',
+                       help='choose the traffic light state')
+
+argparser.add_argument('-d',
+                       '--trigger_distance',
+                       default='-3',
+                       help='set the trigger distance of traffic light')
+
 args = argparser.parse_args()
 
 replace_Ego(args.name)
@@ -94,14 +116,46 @@ entities.remove(entities.find("./ScenarioObject[@name='ego_vehicle']"))
 
 # POVs
 bps = ['vehicle.audi.a2']
+motor_bps = ['vehicle.vespa.zx125','vehicle.kawasaki.ninja']
+# bike_bps=['vehicle.diamondback.century']
+people_bps = ['walker.pedestrian.000']
+
 
 for pov in entities:
-    for ve in pov:
-        ve.set('name', bps[0])
-        ppt = ve.find('./Properties')
-        type_ = ET.Element('Property', {'name': 'type', 'value': 'simulation'})
-        ppt.append(type_)
-        ppt.find('./Property[@name="model"]').set('value', bps[0])
+    try:
+        for ve in pov.find('./Vehicle/..'):
+            model_name = 'default_vehicle'
+            ve_cate = ve.get('vehicleCategory')
+            if ve_cate=='car':
+                if ve.get('name')[0] =='M':
+                    model_name = motor_bps[1]
+                else :
+                    model_name = bps[0]
+            elif ve_cate == 'bicycle':
+                # ve.set('name', motor_bps[0])
+                model_name = motor_bps[0]
+                
+            ve.set('name', model_name)
+
+            ppt = ve.find('./Properties')
+            type_ = ET.Element('Property', {'name': 'type', 'value': 'simulation'})
+            ppt.append(type_)
+            ppt.find('./Property[@name="model"]').set('value', model_name)
+    except:
+        pass
+    try:
+        ped_cnt = 0
+        for ped in pov.find('./Pedestrian/..'):
+            print(ped)
+            ped_cnt += 1
+            ped.set('name', people_bps[0]+str(ped_cnt))
+            ppt = ped.find('./Properties')
+            type_ = ET.Element('Property', {'name': 'type', 'value': 'simulation'})
+            ppt.append(type_)
+            ppt.find('./Property[@name="model"]').set('value', people_bps[0]+str(ped_cnt))
+    except:
+        # print("kkkkkk")
+        pass
 
 # change the information of Ego car
 # by directly replacing the information with specific file
@@ -126,8 +180,16 @@ else :
     print("Unknown controller!")
 er.append(controller)
 
+ego_speed = er.find('./PrivateAction/LongitudinalAction/SpeedAction/SpeedActionTarget/AbsoluteTargetSpeed')
+ego_speed.set('value', str(float(ego_speed.get('value'))*3.6))
 # reverse_all_y_coordinates(tree)
 # reverse_all_y_coordinates(tree)
 # modify_x_coordinates(tree)
+
+# add traffic lights' control
+tl_event = get_traffic_event(args.trafficlight, args.trigger_distance)
+maneuver = root.find('./Storyboard/Story/Act//Maneuver/Event/..')
+maneuver[0].append(tl_event)
+
 
 tree.write('./output.xosc')

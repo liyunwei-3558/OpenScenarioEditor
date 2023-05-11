@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSCENARIO>
-  <FileHeader author="SimOne" date="2023-04-07T19:24:33" description="" revMajor="2" revMinor="2" />
+  <FileHeader author="SimOne" date="2023-04-22T20:09:14" description="" revMajor="2" revMinor="2" />
   <CatalogLocations />
   <RoadNetwork>
     <LogicFile filepath="022eb3e0-c22f-11ed-a8d8-417a2e436efa.xodr" />
   </RoadNetwork>
   <Entities>
     <ScenarioObject name="Ego">
-      <Vehicle name="simonedriver" vehicleCategory="car">
+      <Vehicle name="default" vehicleCategory="car">
         <BoundingBox>
           <Center x="0" y="0" z="0" />
           <Dimensions height="1.48" length="4.93" width="1.86" />
@@ -18,22 +18,22 @@
           <RearAxle maxSteering="0" positionX="0" positionZ="0" trackWidth="0" wheelDiameter="0" />
         </Axles>
         <Properties>
-          <Property name="model" value="simonedriver" />
+          <Property name="model" value="default" />
           <Property name="category" value="Ego" />
-          <Property name="name" value="SimOneDriver控制" />
+          <Property name="name" value="手动控制-默认" />
           <Property name="obuId" value="0" />
           <Property name="obu_enabled" value="false" />
         </Properties>
       </Vehicle>
       <ObjectController>
-        <Controller name="SimOneDriver">
+        <Controller name="Manual">
           <Properties>
-            <Property name="name" value="SimOneDriver" />
+            <Property name="name" value="手动控制" />
           </Properties>
         </Controller>
       </ObjectController>
     </ScenarioObject>
-    <ScenarioObject name="1dfbeb40-d537-11ed-9c59-0145201be545">
+    <ScenarioObject name="fe367ab0-e106-11ed-be1c-0dd1114768ed">
       <Vehicle name="004-AudiA2" vehicleCategory="car">
         <Performance maxAcceleration="0" maxDeceleration="0" maxSpeed="0" />
         <Axles>
@@ -53,7 +53,7 @@
         </Properties>
       </Vehicle>
     </ScenarioObject>
-    <ScenarioObject name="ac58f7b0-d538-11ed-9c59-0145201be545">
+    <ScenarioObject name="cd294cd0-e107-11ed-be1c-0dd1114768ed">
       <Vehicle name="004-AudiA2" vehicleCategory="car">
         <Performance maxAcceleration="0" maxDeceleration="0" maxSpeed="0" />
         <Axles>
@@ -77,11 +77,11 @@
   <Storyboard>
     <Init>
       <Actions>
-        <GlobalAction><EnvironmentAction><Environment name="rainy03"><TimeOfDay animation="false" dateTime="2023-04-07T15:00:00" /><Weather cloudState="cloudy"><Sun azimuth="0" elevation="1.57" intensity="60000" /><Fog visualRange="1200" /><Precipitation intensity="1.0" precipitationType="rain" /></Weather><RoadCondition frictionScaleFactor="0.5"><Properties><Property name="humidityLevel" value="0.5" /><Property name="dirtyLevel" value="0.1" /></Properties></RoadCondition></Environment></EnvironmentAction></GlobalAction><Private entityRef="Ego">
+        <GlobalAction><EnvironmentAction><Environment name="sunny01"><TimeOfDay animation="false" dateTime="2023-04-22T10:00:00" /><Weather cloudState="free"><Sun azimuth="0" elevation="1.57" intensity="60000" /><Fog visualRange="1200" /><Precipitation intensity="0" precipitationType="dry" /></Weather><RoadCondition frictionScaleFactor="0.85"><Properties><Property name="humidityLevel" value="0.1" /><Property name="dirtyLevel" value="0.1" /></Properties></RoadCondition></Environment></EnvironmentAction></GlobalAction><Private entityRef="Ego">
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <WorldPosition h="0.002434045350115051" p="0" r="0" x="-33.81263596869289" y="-6.131638910824085" z="0" />
+                <WorldPosition h="0.002434045350114024" p="0" r="0" x="-30.9984792319634" y="-6.124789112177163" z="0" />
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -90,7 +90,7 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="step" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="7" />
+                  <AbsoluteTargetSpeed value="36" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
@@ -99,11 +99,11 @@
             <ActivateControllerAction lateral="true" longitudinal="true" />
           </PrivateAction>
         </Private>
-        <Private entityRef="1dfbeb40-d537-11ed-9c59-0145201be545">
+        <Private entityRef="fe367ab0-e106-11ed-be1c-0dd1114768ed">
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <WorldPosition h="0.0024340453501149836" p="0" r="0" x="-17.87446975528102" y="-6.092844614849679" z="0" />
+                <WorldPosition h="3.1372246770884296" p="0" r="0" x="50.998750439690134" y="1.713928780847399" z="0" />
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -118,11 +118,11 @@
             </LongitudinalAction>
           </PrivateAction>
         </Private>
-        <Private entityRef="ac58f7b0-d538-11ed-9c59-0145201be545">
+        <Private entityRef="cd294cd0-e107-11ed-be1c-0dd1114768ed">
           <PrivateAction>
             <TeleportAction>
               <Position>
-                <WorldPosition h="3.137224677088429" p="0" r="0" x="53.748697972172344" y="1.7019169982536262" z="0" />
+                <WorldPosition h="-1.583489545677856" p="0" r="0" x="27.942049710448803" y="17.3709754024814" z="1.5e-05" />
               </Position>
             </TeleportAction>
           </PrivateAction>
@@ -146,45 +146,20 @@
             <EntityRef entityRef="Ego" />
           </Actors>
           <Maneuver name="Maneuver">
-            <Event maximumExecutionCount="1" name="事件" priority="overwrite">
-              <Action name="9265ca86-be7f-4efb-8fd1-4c90922af474">
+            <Event maximumExecutionCount="1" name="事件" priority="parallel">
+              <Action name="9b331f12-2754-4c58-9bb9-a1440e98e400">
                 <PrivateAction>
                   <RoutingAction>
                     <AssignRouteAction>
                       <Route closed="false" name="">
                         <Waypoint routeStrategy="shortest">
                           <Position>
-                            <WorldPosition h="0.002434045350116592" p="0" r="0" x="-25.49942458047239" y="-6.1114041373392265" z="0" />
+                            <WorldPosition h="0.0024340453501159615" p="0" r="0" x="13.626256359084353" y="-2.51615989946975" z="0" />
                           </Position>
                         </Waypoint>
                         <Waypoint routeStrategy="shortest">
                           <Position>
-                            <WorldPosition h="0.0024340453501141297" p="0" r="0" x="13.499735852555945" y="-6.016478224763468" z="0" />
-                          </Position>
-                        </Waypoint>
-                        <Waypoint routeStrategy="shortest">
-                          <Position>
-                            <WorldPosition h="0.022838016789914622" p="0" r="0" x="22.975451383109952" y="-5.959262973112339" z="0" />
-                          </Position>
-                        </Waypoint>
-                        <Waypoint routeStrategy="shortest">
-                          <Position>
-                            <WorldPosition h="1.579727790272584" p="0" r="0" x="31.481280503377345" y="-1.1218178090802644" z="1.5e-05" />
-                          </Position>
-                        </Waypoint>
-                        <Waypoint routeStrategy="shortest">
-                          <Position>
-                            <WorldPosition h="1.5639799155570626" p="0" r="0" x="34.90742755653254" y="13.877335150819933" z="1.5e-05" />
-                          </Position>
-                        </Waypoint>
-                        <Waypoint routeStrategy="shortest">
-                          <Position>
-                            <WorldPosition h="1.544056494970279" p="0" r="0" x="35.662612508208895" y="45.87065073222481" z="1.5e-05" />
-                          </Position>
-                        </Waypoint>
-                        <Waypoint routeStrategy="shortest">
-                          <Position>
-                            <WorldPosition h="0.022838016789916024" p="0" r="0" x="22.397213173011906" y="-5.972471083483084" z="0" />
+                            <WorldPosition h="1.54405649496274" p="0" r="0" x="32.8740427201412" y="72.51674198286418" z="1.5e-05" />
                           </Position>
                         </Waypoint>
                       </Route>
@@ -192,66 +167,23 @@
                   </RoutingAction>
                 </PrivateAction>
               </Action>
-              <StartTrigger>
-                <ConditionGroup>
-                  <Condition conditionEdge="none" delay="0" name="仿真时间">
-                    <ByValueCondition>
-                      <SimulationTimeCondition rule="greaterThan" value="0" />
-                    </ByValueCondition>
-                  </Condition>
-                </ConditionGroup>
-              </StartTrigger>
+              <StartTrigger />
             </Event>
           </Maneuver>
         </ManeuverGroup>
-        <ManeuverGroup maximumExecutionCount="1" name="1dfbeb40-d537-11ed-9c59-0145201be545">
+        <ManeuverGroup maximumExecutionCount="1" name="fe367ab0-e106-11ed-be1c-0dd1114768ed">
           <Actors selectTriggeringEntities="false">
-            <EntityRef entityRef="1dfbeb40-d537-11ed-9c59-0145201be545" />
+            <EntityRef entityRef="fe367ab0-e106-11ed-be1c-0dd1114768ed" />
           </Actors>
           <Maneuver name="Maneuver">
             <Event maximumExecutionCount="1" name="事件" priority="parallel">
-              <Action name="913ccdaa-b3b1-4810-9900-41308429d7d5">
+              <Action name="2b316d35-25da-4ade-850c-3de53481cec3">
                 <PrivateAction>
                   <LongitudinalAction>
                     <SpeedAction>
                       <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="linear" value="3" />
                       <SpeedActionTarget>
-                        <AbsoluteTargetSpeed value="9" />
-                      </SpeedActionTarget>
-                    </SpeedAction>
-                  </LongitudinalAction>
-                </PrivateAction>
-              </Action>
-              <StartTrigger>
-                <ConditionGroup>
-                  <Condition conditionEdge="rising" delay="0" name="相对距离">
-                    <ByEntityCondition>
-                      <EntityCondition>
-                        <RelativeDistanceCondition entityRef="Ego" freespace="false" relativeDistanceType="cartesianDistance" rule="lessThan" value="9" />
-                      </EntityCondition>
-                      <TriggeringEntities triggeringEntitiesRule="any">
-                        <EntityRef entityRef="1dfbeb40-d537-11ed-9c59-0145201be545" />
-                      </TriggeringEntities>
-                    </ByEntityCondition>
-                  </Condition>
-                </ConditionGroup>
-              </StartTrigger>
-            </Event>
-          </Maneuver>
-        </ManeuverGroup>
-        <ManeuverGroup maximumExecutionCount="1" name="ac58f7b0-d538-11ed-9c59-0145201be545">
-          <Actors selectTriggeringEntities="false">
-            <EntityRef entityRef="ac58f7b0-d538-11ed-9c59-0145201be545" />
-          </Actors>
-          <Maneuver name="Maneuver">
-            <Event maximumExecutionCount="1" name="事件" priority="parallel">
-              <Action name="fdcee2cc-a38c-4db4-9d83-5cda46a4cfc5">
-                <PrivateAction>
-                  <LongitudinalAction>
-                    <SpeedAction>
-                      <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="linear" value="2" />
-                      <SpeedActionTarget>
-                        <AbsoluteTargetSpeed value="7" />
+                        <AbsoluteTargetSpeed value="8" />
                       </SpeedActionTarget>
                     </SpeedAction>
                   </LongitudinalAction>
@@ -264,7 +196,7 @@
                       <EntityCondition>
                         <ReachPositionCondition tolerance="5">
                           <Position>
-                            <WorldPosition h="0" p="0" r="0" x="16" y="-2.8" z="0" />
+                            <WorldPosition h="0" p="0" r="0" x="0" y="-2.5" z="0" />
                           </Position>
                         </ReachPositionCondition>
                       </EntityCondition>
@@ -276,25 +208,30 @@
                 </ConditionGroup>
               </StartTrigger>
             </Event>
-            <Event maximumExecutionCount="1" name="事件(2)" priority="parallel">
-              <Action name="0c1c5f0c-15c5-42ca-aba4-2a11dd6f6009">
+            <Event maximumExecutionCount="1" name="事件(2)" priority="overwrite">
+              <Action name="45e2dbc4-bd60-4db5-b89b-f1ad1a0dbf03">
                 <PrivateAction>
                   <RoutingAction>
                     <AssignRouteAction>
                       <Route closed="false" name="">
                         <Waypoint routeStrategy="shortest">
                           <Position>
-                            <WorldPosition h="3.137224677088429" p="0" r="0" x="50.24931073913107" y="1.7172023366676192" z="0" />
+                            <WorldPosition h="3.137224677088429" p="0" r="0" x="43.999429983489684" y="1.7445018425625574" z="0" />
                           </Position>
                         </Waypoint>
                         <Waypoint routeStrategy="shortest">
                           <Position>
-                            <WorldPosition h="-2.988425638336397" p="0" r="0" x="39.311865852882256" y="1.658963125988618" z="0" />
+                            <WorldPosition h="-3.065833028291489" p="0" r="0" x="30.395636274566137" y="1.4781298766436246" z="0" />
                           </Position>
                         </Waypoint>
                         <Waypoint routeStrategy="shortest">
                           <Position>
-                            <WorldPosition h="-3.139158608239678" p="0" r="0" x="12.250047462256985" y="0.9805007070837676" z="0" />
+                            <WorldPosition h="-3.1391586082396783" p="0" r="0" x="12.126569475162826" y="0.9802001554698921" z="0" />
+                          </Position>
+                        </Waypoint>
+                        <Waypoint routeStrategy="shortest">
+                          <Position>
+                            <WorldPosition h="-3.1391586082396787" p="0" r="0" x="-26.748504461837268" y="0.8855762756492754" z="0" />
                           </Position>
                         </Waypoint>
                       </Route>
@@ -308,6 +245,45 @@
                     <ByValueCondition>
                       <SimulationTimeCondition rule="greaterThan" value="0" />
                     </ByValueCondition>
+                  </Condition>
+                </ConditionGroup>
+              </StartTrigger>
+            </Event>
+          </Maneuver>
+        </ManeuverGroup>
+        <ManeuverGroup maximumExecutionCount="1" name="cd294cd0-e107-11ed-be1c-0dd1114768ed">
+          <Actors selectTriggeringEntities="false">
+            <EntityRef entityRef="cd294cd0-e107-11ed-be1c-0dd1114768ed" />
+          </Actors>
+          <Maneuver name="Maneuver">
+            <Event maximumExecutionCount="1" name="事件" priority="parallel">
+              <Action name="ee23915a-65fb-4a45-8a84-51fd99bf6b5e">
+                <PrivateAction>
+                  <LongitudinalAction>
+                    <SpeedAction>
+                      <SpeedActionDynamics dynamicsDimension="time" dynamicsShape="linear" value="3" />
+                      <SpeedActionTarget>
+                        <AbsoluteTargetSpeed value="10" />
+                      </SpeedActionTarget>
+                    </SpeedAction>
+                  </LongitudinalAction>
+                </PrivateAction>
+              </Action>
+              <StartTrigger>
+                <ConditionGroup>
+                  <Condition conditionEdge="none" delay="0" name="到达位置">
+                    <ByEntityCondition>
+                      <EntityCondition>
+                        <ReachPositionCondition tolerance="5">
+                          <Position>
+                            <WorldPosition h="0" p="0" r="0" x="0" y="-3" z="0" />
+                          </Position>
+                        </ReachPositionCondition>
+                      </EntityCondition>
+                      <TriggeringEntities triggeringEntitiesRule="any">
+                        <EntityRef entityRef="Ego" />
+                      </TriggeringEntities>
+                    </ByEntityCondition>
                   </Condition>
                 </ConditionGroup>
               </StartTrigger>
@@ -327,9 +303,23 @@
     </Story>
     <StopTrigger>
       <ConditionGroup>
-        <Condition conditionEdge="risingOrFalling" delay="0" name="end">
+        <Condition conditionEdge="none" delay="0" name="ReachPositionCondition">
+          <ByEntityCondition>
+            <EntityCondition>
+              <ReachPositionCondition tolerance="5">
+                <Position>
+                  <WorldPosition h="0" p="0" r="0" x="32.5" y="68.5" z="0" />
+                </Position>
+              </ReachPositionCondition>
+            </EntityCondition>
+            <TriggeringEntities triggeringEntitiesRule="any">
+              <EntityRef entityRef="Ego" />
+            </TriggeringEntities>
+          </ByEntityCondition>
+        </Condition>
+        <Condition conditionEdge="none" delay="0" name="SimulationTimeCondition">
           <ByValueCondition>
-            <SimulationTimeCondition rule="greaterThan" value="666" />
+            <SimulationTimeCondition rule="greaterThan" value="180" />
           </ByValueCondition>
         </Condition>
       </ConditionGroup>

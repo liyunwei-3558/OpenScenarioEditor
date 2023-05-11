@@ -1,0 +1,30 @@
+<Event maximumExecutionCount="120" name="shijian123" priority="parallel">
+  <Action name="traffic_signal_control">
+    <GlobalAction>
+      <InfrastructureAction>
+        <TrafficSignalAction>
+          <TrafficSignalStateAction name="pos=40,11" state="Green" />
+        </TrafficSignalAction>
+      </InfrastructureAction>
+    </GlobalAction>
+  </Action>
+
+  <StartTrigger>
+    <ConditionGroup>
+      <Condition conditionEdge="none" delay="0" name="daodaweizhi">
+        <ByEntityCondition>
+          <EntityCondition>
+            <ReachPositionCondition tolerance="4">
+              <Position>
+                <WorldPosition h="0" p="0" r="0" x="0" y="-3" z="0" />
+              </Position>
+            </ReachPositionCondition>
+          </EntityCondition>
+          <TriggeringEntities triggeringEntitiesRule="any">
+            <EntityRef entityRef="ego_vehicle" />
+          </TriggeringEntities>
+        </ByEntityCondition>
+      </Condition>
+    </ConditionGroup>
+  </StartTrigger>
+</Event>

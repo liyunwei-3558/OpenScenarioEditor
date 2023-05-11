@@ -1,12 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <OpenSCENARIO>
-  <FileHeader author="Yunwei_Li" date="2023-05-11T15:13:42" description="description" revMajor="1" revMinor="0" />
+  <FileHeader author="SimOne" date="2023-05-11T15:13:42" description="" revMajor="2" revMinor="2" />
   <CatalogLocations />
   <RoadNetwork>
-    <LogicFile filepath="Town05" />
-  <SceneGraphFile filepath="" /></RoadNetwork>
+    <LogicFile filepath="022eb3e0-c22f-11ed-a8d8-417a2e436efa.xodr" />
+  </RoadNetwork>
   <Entities>
+    <ScenarioObject name="Ego">
+      <Vehicle name="default" vehicleCategory="car">
+        <BoundingBox>
+          <Center x="0" y="0" z="0" />
+          <Dimensions height="1.48" length="4.93" width="1.86" />
+        </BoundingBox>
+        <Performance maxAcceleration="0" maxDeceleration="0" maxSpeed="0" />
+        <Axles>
+          <FrontAxle maxSteering="0" positionX="0" positionZ="0" trackWidth="0" wheelDiameter="0" />
+          <RearAxle maxSteering="0" positionX="0" positionZ="0" trackWidth="0" wheelDiameter="0" />
+        </Axles>
+        <Properties>
+          <Property name="model" value="default" />
+          <Property name="category" value="Ego" />
+          <Property name="name" value="手动控制-默认" />
+          <Property name="obuId" value="0" />
+          <Property name="obu_enabled" value="false" />
+        </Properties>
+      </Vehicle>
+      <ObjectController>
+        <Controller name="Manual">
+          <Properties>
+            <Property name="name" value="手动控制" />
+          </Properties>
+        </Controller>
+      </ObjectController>
+    </ScenarioObject>
     <ScenarioObject name="2371bae0-efd2-11ed-b229-a96d1605c2ac">
-      <Vehicle name="vehicle.vespa.zx125" vehicleCategory="bicycle">
+      <Vehicle name="Bike09" vehicleCategory="bicycle">
         <Performance maxAcceleration="0" maxDeceleration="0" maxSpeed="0" />
         <Axles>
           <FrontAxle maxSteering="0" positionX="0" positionZ="0" trackWidth="0" wheelDiameter="0" />
@@ -17,40 +45,19 @@
           <Dimensions height="1.08120918" length="1.22812744" width="0.00016113" />
         </BoundingBox>
         <Properties>
-          <Property name="model" value="vehicle.vespa.zx125" />
+          <Property name="model" value="Bike09" />
           <Property name="category" value="bicycle" />
           <Property name="name" value="Bike09" />
           <Property name="obuId" value="1" />
           <Property name="obu_enabled" value="false" />
-        <Property name="type" value="simulation" /></Properties>
-      </Vehicle>
-    </ScenarioObject>
-  <ScenarioObject name="ego_vehicle">
-      <Vehicle name="vehicle.toyota.prius" vehicleCategory="car">
-        <BoundingBox>
-          <Center x="0" y="0" z="0" />
-          <Dimensions height="1.48" length="4.93" width="1.86" />
-        </BoundingBox>
-        <Performance maxSpeed="69.444" maxAcceleration="10.0" maxDeceleration="10.0" />
-        <Axles>
-          <FrontAxle maxSteering="0.5" wheelDiameter="0.6" trackWidth="1.8" positionX="3.1" positionZ="0.3" />
-          <RearAxle maxSteering="0.0" wheelDiameter="0.6" trackWidth="1.8" positionX="0.0" positionZ="0.3" />
-        </Axles>
-        <Properties>
-          
-          <Property name="category" value="ego_vehicle" />
-          <Property name="name" value="SimOneDriver_controller" />
-          <Property name="obuId" value="0" />
-          <Property name="obu_enabled" value="false" />
-          <Property name="type" value="ego_vehicle" />
-          <Property name="color" value="0,0,255" />
         </Properties>
       </Vehicle>
-    </ScenarioObject></Entities>
+    </ScenarioObject>
+  </Entities>
   <Storyboard>
     <Init>
       <Actions>
-        <GlobalAction><EnvironmentAction><Environment name="sunny01"><TimeOfDay animation="false" dateTime="2023-05-11T10:00:00" /><Weather cloudState="free"><Sun azimuth="0" elevation="1.57" intensity="60000" /><Fog visualRange="1200" /><Precipitation intensity="0" precipitationType="dry" /></Weather><RoadCondition frictionScaleFactor="0.85"><Properties><Property name="humidityLevel" value="0.1" /><Property name="dirtyLevel" value="0.1" /></Properties></RoadCondition></Environment></EnvironmentAction></GlobalAction><Private entityRef="ego_vehicle">
+        <GlobalAction><EnvironmentAction><Environment name="sunny01"><TimeOfDay animation="false" dateTime="2023-05-11T10:00:00" /><Weather cloudState="free"><Sun azimuth="0" elevation="1.57" intensity="60000" /><Fog visualRange="1200" /><Precipitation intensity="0" precipitationType="dry" /></Weather><RoadCondition frictionScaleFactor="0.85"><Properties><Property name="humidityLevel" value="0.1" /><Property name="dirtyLevel" value="0.1" /></Properties></RoadCondition></Environment></EnvironmentAction></GlobalAction><Private entityRef="Ego">
           <PrivateAction>
             <TeleportAction>
               <Position>
@@ -63,32 +70,12 @@
               <SpeedAction>
                 <SpeedActionDynamics dynamicsDimension="rate" dynamicsShape="step" value="0" />
                 <SpeedActionTarget>
-                  <AbsoluteTargetSpeed value="29.880000000000003" />
+                  <AbsoluteTargetSpeed value="8.3" />
                 </SpeedActionTarget>
               </SpeedAction>
             </LongitudinalAction>
           </PrivateAction>
-        <PrivateAction>
-            <ControllerAction>
-                <AssignControllerAction>
-                    <Controller name="EgoVehicleAgent">
-                        <Properties>
-                            <Property name="module" value="carla_ros_scenario_runner.ros_vehicle_control" />
-                            <Property name="launch" value="carla_autoware_agent_town05.launch" />
-                            <Property name="launch-package" value="carla_autoware_agent" />
-                        </Properties>
-                    </Controller>
-                </AssignControllerAction>
-                <OverrideControllerValueAction>
-                    <Throttle value="0" active="false" />
-                    <Brake value="0" active="false" />
-                    <Clutch value="0" active="false" />
-                    <ParkingBrake value="0" active="false" />
-                    <SteeringWheel value="0" active="false" />
-                    <Gear number="0" active="false" />
-                </OverrideControllerValueAction>
-            </ControllerAction>
-        </PrivateAction></Private>
+        </Private>
         <Private entityRef="2371bae0-efd2-11ed-b229-a96d1605c2ac">
           <PrivateAction>
             <TeleportAction>
@@ -112,12 +99,12 @@
     </Init>
     <Story name="Story">
       <Act name="Act">
-        <ManeuverGroup maximumExecutionCount="1" name="ego_vehicle">
+        <ManeuverGroup maximumExecutionCount="1" name="Ego">
           <Actors selectTriggeringEntities="false">
-            <EntityRef entityRef="ego_vehicle" />
+            <EntityRef entityRef="Ego" />
           </Actors>
           <Maneuver name="Maneuver">
-            <Event maximumExecutionCount="1" name="shijian" priority="parallel">
+            <Event maximumExecutionCount="1" name="事件" priority="parallel">
               <Action name="7fe2a481-6274-48d9-98d5-9970926a5f96">
                 <PrivateAction>
                   <RoutingAction>
@@ -154,36 +141,7 @@
                 </PrivateAction>
               </Action>
               <StartTrigger />
-            <Event maximumExecutionCount="120" name="shijian123" priority="parallel">
-  <Action name="traffic_signal_control">
-    <GlobalAction>
-      <InfrastructureAction>
-        <TrafficSignalAction>
-          <TrafficSignalStateAction name="pos=40,11" state="Green" />
-        </TrafficSignalAction>
-      </InfrastructureAction>
-    </GlobalAction>
-  </Action>
-
-  <StartTrigger>
-    <ConditionGroup>
-      <Condition conditionEdge="none" delay="0" name="daodaweizhi">
-        <ByEntityCondition>
-          <EntityCondition>
-            <ReachPositionCondition tolerance="4">
-              <Position>
-                <WorldPosition h="0" p="0" r="0" x="0" y="-3" z="0" />
-              </Position>
-            </ReachPositionCondition>
-          </EntityCondition>
-          <TriggeringEntities triggeringEntitiesRule="any">
-            <EntityRef entityRef="ego_vehicle" />
-          </TriggeringEntities>
-        </ByEntityCondition>
-      </Condition>
-    </ConditionGroup>
-  </StartTrigger>
-</Event></Event>
+            </Event>
           </Maneuver>
         </ManeuverGroup>
         <ManeuverGroup maximumExecutionCount="1" name="2371bae0-efd2-11ed-b229-a96d1605c2ac">
@@ -191,7 +149,7 @@
             <EntityRef entityRef="2371bae0-efd2-11ed-b229-a96d1605c2ac" />
           </Actors>
           <Maneuver name="Maneuver">
-            <Event maximumExecutionCount="1" name="shijian" priority="parallel">
+            <Event maximumExecutionCount="1" name="事件" priority="parallel">
               <Action name="06812fc7-0107-4b3d-9796-46234a73c0d6">
                 <PrivateAction>
                   <LongitudinalAction>
@@ -206,7 +164,7 @@
               </Action>
               <StartTrigger>
                 <ConditionGroup>
-                  <Condition conditionEdge="none" delay="0" name="daodaweizhi">
+                  <Condition conditionEdge="none" delay="0" name="到达位置">
                     <ByEntityCondition>
                       <EntityCondition>
                         <ReachPositionCondition tolerance="2">
@@ -216,7 +174,7 @@
                         </ReachPositionCondition>
                       </EntityCondition>
                       <TriggeringEntities triggeringEntitiesRule="any">
-                        <EntityRef entityRef="ego_vehicle" />
+                        <EntityRef entityRef="Ego" />
                       </TriggeringEntities>
                     </ByEntityCondition>
                   </Condition>
@@ -253,7 +211,7 @@
               </ReachPositionCondition>
             </EntityCondition>
             <TriggeringEntities triggeringEntitiesRule="any">
-              <EntityRef entityRef="ego_vehicle" />
+              <EntityRef entityRef="Ego" />
             </TriggeringEntities>
           </ByEntityCondition>
         </Condition>
